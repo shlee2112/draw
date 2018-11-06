@@ -89,10 +89,47 @@ window.addEventListener("keydown", changeColor);
 
 
 
-canvas.addEventListener('touchmove', (e)=> {
-  isDrawing = true;
-  [lastX, lastY] = [e.offsetX, e.offsetY];
-});
+canvas.ontouchstart = function(event){
+    event.preventDefault();
 
-canvas.addEventListener('touchmove', draw);
-canvas.addEventListener('touchend', () => isDrawing = false);
+    lastx = event.touches[0].clientX;
+    lasty = event.touches[0].clientY - canvastop;
+
+    dot(lastx,lasty);
+  }
+
+  canvas.ontouchmove = function(event){
+    event.preventDefault();
+
+    var newx = event.touches[0].clientX;
+    var newy = event.touches[0].clientY - canvastop;
+
+    line(lastx,lasty, newx,newy);
+
+    lastx = newx;
+    lasty = newy;
+  }
+
+
+
+
+
+// function drawtouch(e) {
+//   if(!isDrawing) return;
+//   // console.log(e);
+//   ctx.beginPath();
+//   ctx.moveTo(lastX, lastY);
+//   ctx.lineTo(e.offsetX, e.offsetY);
+//   ctx.stroke();
+//   [lastX, lastY] = [e.offsetX, e.offsetY];
+// }
+//
+//
+//
+// canvas.addEventListener('touchmove', (e)=> {
+//   isDrawing = true;
+//   [lastX, lastY] = [e.offsetX, e.offsetY];
+// });
+//
+// canvas.addEventListener('touchmove', drawtouch);
+// canvas.addEventListener('touchend', () => isDrawing = false);
