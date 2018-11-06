@@ -89,56 +89,48 @@ window.addEventListener("keydown", changeColor);
 
 
 
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20);
+        window.addEventListener('touchmove', function (e) {
+            myGameArea.x = e.touches[0].screenX;
+            myGameArea.y = e.touches[0].screenY;
+        })
+    },
+    clear : function(){
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
 
 
-  var canvastop = canvas.offsetTop
-
-
-  var lastx;
-  var lasty;
-
-
-  canvas.ontouchstart = function(event){
-    event.preventDefault();
-
-    lastx = event.touches[0].clientX;
-    lasty = event.touches[0].clientY - canvastop;
-
-    dot(lastx,lasty);
-  }
-
-  canvas.ontouchmove = function(event){
-    event.preventDefault();
-
-    var newx = event.touches[0].clientX;
-    var newy = event.touches[0].clientY - canvastop;
-
-    line(lastx,lasty, newx,newy);
-
-    lastx = newx;
-    lasty = newy;
-  }
-
-
-
-
-
-// function drawtouch(e) {
-//   if(!isDrawing) return;
-//   // console.log(e);
-//   ctx.beginPath();
-//   ctx.moveTo(lastX, lastY);
-//   ctx.lineTo(e.offsetX, e.offsetY);
-//   ctx.stroke();
-//   [lastX, lastY] = [e.offsetX, e.offsetY];
-// }
-//
-//
-//
-// canvas.addEventListener('touchmove', (e)=> {
-//   isDrawing = true;
-//   [lastX, lastY] = [e.offsetX, e.offsetY];
-// });
-//
-// canvas.addEventListener('touchmove', drawtouch);
-// canvas.addEventListener('touchend', () => isDrawing = false);
+  //
+  //
+  //
+  // var canvastop = canvas.offsetTop
+  //
+  //
+  // canvas.ontouchstart = function(event){
+  //   event.preventDefault();
+  //
+  //   lastX = event.touches[0].clientX;
+  //   lastY = event.touches[0].clientY - canvastop;
+  //
+  //   dot(lastx,lasty);
+  // }
+  //
+  //
+  // canvas.ontouchmove = function(event){
+  //   event.preventDefault();
+  //
+  //   var newX = event.touches[0].clientX;
+  //   var newY = event.touches[0].clientY - canvastop;
+  //
+  //   line(lastX,lastY, newX,newY);
+  //
+  //   lastX = newx;
+  //   lastY = newy;
+  // }
+  //
